@@ -57,7 +57,7 @@ app.put('/api/enquiries/:id', checkSchema(enquirySchema), authenticateUser, auth
 app.post('/api/invioices/:id', checkSchema(invoiceSchema), authenticateUser, authorizeUser([role.serviceProvider]), invoiceCltr.create)
 app.get('/api/invoices', invoiceCltr.list)
 
-app.post('/api/create-checkout-session',checkSchema(paymentsValidationSchema), authenticateUser, authorizeUser([role.customer]), paymentsCltr.pay)
+app.post('/api/create-checkout-session',checkSchema(paymentSchema), authenticateUser, authorizeUser([role.customer]), paymentsCltr.pay)
 app.put('/api/payments/:id/success',paymentsCltr.successUpdate)
 app.put('/api/payments/:id/failed',paymentsCltr.failedUpdate)
 

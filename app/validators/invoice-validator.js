@@ -31,10 +31,6 @@ const invoiceSchema =  {
         trim : true
     },
     invoiceDate : {
-        in: ['body'], 
-        exists: {
-            errorMessage: 'application date is required'
-        }, 
         notEmpty: {
             errorMessage: 'application date cannot be empty'
         },
@@ -42,11 +38,10 @@ const invoiceSchema =  {
             errorMessage: 'should be a valid date'
         },
         custom: {
-            options: async function(value) {
-                if(new Date(value) >= new Date()) {
+            options: async function(value, { req }) {
+                const invoice = await Invoice.findById(req.params.invoiceid)
+                if(new Date(value) >= invoice.invoiceDate ) {
                     return true 
-                } else {
-                    throw new Error("Invoice Date should be greater than present Date")
                 }
             }
         },

@@ -9,8 +9,12 @@ const invoiceSchema = new Schema({
         type : Schema.Types.ObjectId,
         ref : 'ServiceProvider'
     },
-    invoiceDate : new Date(),
-    lineItems : [{}],
+    invoiceDate : Date,
+    lineItems : [{
+        categoryId: Schema.Types.ObjectId,
+        quantity: Number, 
+        amount: Number
+    }],
     amount : Number
 }, {timestamps : true})
 
