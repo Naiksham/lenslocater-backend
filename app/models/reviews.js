@@ -13,6 +13,6 @@ const reviewsSchema = new Schema({
     rating : String 
 }, {timestamps: true})
 
-const Reviews = model('Reviews', reviewsSchema)
+const Review = model('Reviews', reviewsSchema)
 
-module.exports = Reviews
+module.exports = Review

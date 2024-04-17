@@ -10,7 +10,7 @@ const serviceProviderSchema = {
         isNumeric : {
             errorMessage : 'Mobile should be in Number'
         },
-        isLength : {
+        isFloat : {
             options : {min : 10, max : 10}
         },
         trim : true
@@ -25,13 +25,25 @@ const serviceProviderSchema = {
         },
         trim : true
     },
-    categories : {
+    'categories.name' : {
         notEmpty : {
-            errorMessage : 'Categories should be selected'
+            errorMessage : 'Categoty must be selected'
         },
         isIn : {
-            options : ['wedding', 'events', 'baby', 'birthday', 'nature', 'travel'],
-            errorMessage : 'Categories must selected within the list'
+            options : ['Wedding', 'Baby', 'Nature', 'Travel', 'Events', 'Drone'],
+            errorMessage : 'Category should be selected within the list provided'
+        },
+        trim : true
+    },
+    'categories.amount' : {
+        notEmpty : {
+            errorMessage : 'amount is required'
+        },
+        isNumeric : {
+            errorMessage : 'amount should be a number'
+        },
+        isFloat : {
+            options : {min:0}
         },
         trim : true
     },

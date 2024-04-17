@@ -1,3 +1,5 @@
+const Review = require('../models/reviews')
+
 const reviewsSchema = {
     customerId : {
         notEmpty : {

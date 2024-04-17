@@ -11,3 +11,5 @@ const gallerySchema = new Schema({
 }, {timestamps: true})
 
 const Gallery = model('Gallery', gallerySchema)
+
+module.exports = Gallery

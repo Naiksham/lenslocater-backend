@@ -83,12 +83,4 @@ userCltr.account = async (req, res) => {
     }
 }
 
-userCltr.forgotPassword = async (req, res) => {
-    
-}
-
-userCltr.updatePassword = async (req, res) => {
-
-}
-
 module.exports = userCltr

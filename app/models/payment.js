@@ -13,4 +13,6 @@ const paymentSchema = new Schema({
     amount : Number
 }, {timestamps: true})
 
-module.exports = paymentSchema
+const Payment = model('Payment', paymentSchema)
+
+module.exports = Payment

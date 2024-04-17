@@ -19,3 +19,4 @@ const gallerySchema = {
 }
 
 module.exports = gallerySchema
+

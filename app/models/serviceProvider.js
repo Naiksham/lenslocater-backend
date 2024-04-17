@@ -9,7 +9,10 @@ const serviceProviderSchema = new Schema({
     },
     mobile : String,
     serviceType : [String], // photograhpy, videography
-    categories : [{ name: '', amount: '' }], // ['weddding', 'baby shoot', 'birthday]
+    categories : [{
+        name : String,
+        amount : Number
+    }], // ['weddding', 'baby shoot', 'birthday]
     isVerified : Boolean,
 socialLinks : String,
     location : String,

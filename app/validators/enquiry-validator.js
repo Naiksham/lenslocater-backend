@@ -30,3 +30,5 @@ const enquirySchema = {
         trim : true
     }
 }
+
+module.exports = enquirySchema

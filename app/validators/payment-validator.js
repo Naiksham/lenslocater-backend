@@ -40,3 +40,4 @@ const paymentSchema = {
 }
 
 module.exports = paymentSchema
+
