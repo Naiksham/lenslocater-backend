@@ -1,7 +1,5 @@
 const ServiceProvider = require('../models/serviceProvider')
 const {validationResult} = require('express-validator')
-const role = require('../utils/role')
-
 serviceProviderCltr = {}
 
 serviceProviderCltr.create = async (req, res)=>{
@@ -30,8 +28,8 @@ serviceProviderCltr.update = async (req, res)=>{
     try{
         const id = req.params.id
         const {body} = req
-        const serviceProvider = await ServiceProvider.findByIdAndUpdate({_id : id,userId : req.user.id}, body, {new : true, runValidators : true})
-        res.status(200).json(serviceProvider)
+        const serviceProvider = await ServiceProvider.findOneAndUpdate({userId : req.user.id}, body, {new : true, runValidators : true})
+        res.status(201).json(serviceProvider)
     } catch(err){
         console.log(err)
         res.status(500).json({errors : 'Internal Server Error'})

@@ -6,15 +6,6 @@ const gallerySchema = {
             errorMessage : 'Title is required'
         },
         trim : true
-    },
-    serviceProviderId : {
-        notEmpty : {
-            errorMessage : 'Service Provider ID is required'
-        },
-        isMongoId : {
-            errorMessage : 'Service Provider ID must be a valid MongoDB ID'
-        },
-        trim : true
     }
 }
 

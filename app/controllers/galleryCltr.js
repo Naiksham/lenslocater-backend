@@ -9,6 +9,7 @@ galleryCltr.create = async(req, res)=>{
     }
     try{
         const {body, files} = req
+        console.log(files)
         const gallery = new Gallery(body)
         gallery.serviceProviderId = req.user.id
         gallery.galleryImg = files.galleryImg[0].path
@@ -48,6 +49,7 @@ galleryCltr.update = async(req, res)=>{
     try{
         const id = req.params.id
         const {body, files} = req
+        console.log(files)
         let updateGallery = {...body} // spreading the body object to get all the existing fields
         if(files.galleryImg){
             updateGallery.galleryImg = files.galleryImg[0].path // assigning the path to gallery image
@@ -58,7 +60,7 @@ galleryCltr.update = async(req, res)=>{
             updateGallery.galleryImg = body.galleryImg
             updateGallery.galleryVideo = body.galleryVideo
         }    
-        const gallery = await Gallery.findOneAndUpdate({_id : id, serviceProviderId : req.user.id } , updateGallery , {new:true}) // updating the model with all the fields
+        const gallery = await Gallery.findOneAndUpdate({serviceProviderId : req.user.id } , updateGallery , {new:true}) // updating the model with all the fields
         if(!gallery){        // returning user if unthorized/wrong id is given
             return res.status(404).json({error:'Image/Video not found'})
         }

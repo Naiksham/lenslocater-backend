@@ -75,7 +75,7 @@ userCltr.login = async (req, res) => {
 
 userCltr.account = async (req, res) => {
     try{
-        const user = await user.findById(req, user.id).select({password : 0})
+        const user = await User.findById(req.user.id).select({password : 0})
         res.json(user)
     } catch (err) {
         console.log(err)

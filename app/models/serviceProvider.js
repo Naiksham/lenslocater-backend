@@ -14,7 +14,7 @@ const serviceProviderSchema = new Schema({
         amount : Number
     }], // ['weddding', 'baby shoot', 'birthday]
     isVerified : Boolean,
-socialLinks : String,
+    socialLinks : String,
     location : String,
     // geo : {
     //     lat : Number,

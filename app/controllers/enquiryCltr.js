@@ -20,6 +20,7 @@ enquiryCltr.create = async (req, res)=>{
         res.status(500).json({ message: 'Internal server error' });
       }
 }
+
 enquiryCltr.update = async (req, res)=>{
     const errors = validationResult(req)
     if(!errors.isEmpty()){
@@ -28,7 +29,7 @@ enquiryCltr.update = async (req, res)=>{
     try{
         const id = req.params.id
         const {body} = req
-        const enquiry = await Enquiry.findOneAndUpdate({_id : id,serviceProviderId : req.user.id}, body, {new : true, runValidators : true})
+        const enquiry = await Enquiry.findOneAndUpdate({serviceProviderId : req.user.id}, body, {new : true, runValidators : true})
         res.status(200).json(enquiry)
     } catch(err){
         console.log(err)

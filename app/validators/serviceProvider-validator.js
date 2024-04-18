@@ -10,7 +10,7 @@ const serviceProviderSchema = {
         isNumeric : {
             errorMessage : 'Mobile should be in Number'
         },
-        isFloat : {
+        isLength : {
             options : {min : 10, max : 10}
         },
         trim : true
@@ -25,28 +25,65 @@ const serviceProviderSchema = {
         },
         trim : true
     },
-    'categories.name' : {
-        notEmpty : {
-            errorMessage : 'Categoty must be selected'
-        },
-        isIn : {
-            options : ['Wedding', 'Baby', 'Nature', 'Travel', 'Events', 'Drone'],
-            errorMessage : 'Category should be selected within the list provided'
-        },
-        trim : true
+    categories: {
+        custom: {
+            options: function(value){
+                if(!Array.isArray(value)) {
+                    throw new Error('categories should be an array')
+                }
+                if(value.length === 0){
+                    throw new Error('categories array should have properties')
+                }
+                try {
+                    value.forEach((ele) => {
+                        if(typeof ele.name != 'string'){
+                            throw new Error('name should be a string')
+                        }
+                        if((!['wedding', 'babyphots', 'events', 'nature', 'travel', 'drone'].includes(ele.name.toLowerCase()))){
+                            throw new Error('categories should be selected within provided list')
+                        }
+                        if(typeof ele.amount != 'number'){
+                            throw new Error('amount should be a number')
+                        }
+                        if(ele.amount <= 0){
+                            throw new Error('amount should be greater than 0')
+                        }
+                    })
+                } catch(err) {
+                    throw new Error(err)
+                }
+                return true 
+            }
+        }
     },
-    'categories.amount' : {
-        notEmpty : {
-            errorMessage : 'amount is required'
-        },
-        isNumeric : {
-            errorMessage : 'amount should be a number'
-        },
-        isFloat : {
-            options : {min:0}
-        },
-        trim : true
-    },
+    // categories : {
+    //     custom : {
+    //         options : function(value){
+    //             if(!Array.isArray(value)){
+    //                 throw new Error('categories should be an array')
+    //             }
+    //             if(value.length === 0){
+    //                 throw new Error('categories array should have properties')
+    //             }
+    //             value.forEach((ele)=>{
+    //                 if(typeof ele.name != 'string'){
+    //                     throw new Error('name should be a string')
+    //                 }
+    //                 if((!['Wedding', 'BabyPhots', 'Events', 'Nature', 'Travel', 'Drone'].includes(ele.name))){
+    //                     throw new Error('categories should be selected within provided list')
+    //                 }
+    //                 if(typeof ele.amount != 'number'){
+    //                     throw new Error('amount should be a number')
+    //                 }
+    //                 if(ele.amount <= 0){
+    //                     throw new Error('amount should be greater than 0')
+    //                 }
+    //             })
+    //             console.log(value)
+    //         }
+    //     },
+    //     trim : true
+    // },
     // userId : {
     //     notEmpty : {
     //         errorMessage : 'User ID is required'

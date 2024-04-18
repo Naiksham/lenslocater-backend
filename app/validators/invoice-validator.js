@@ -46,6 +46,15 @@ const invoiceSchema =  {
             }
         },
         trim : true
+    },
+    lineItems : {
+        custom : {
+            options : function(value){
+                if(!Array.isArray(value)){
+                    throw new Error('lineItems should be an array')
+                }
+            }
+        }
     }
 }
 

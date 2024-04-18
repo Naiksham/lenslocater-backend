@@ -51,8 +51,8 @@ app.get('/api/galleries/:id', galleryCltr.listOne)
 app.put('/api/galleries/:id' , authenticateUser , authorizeUser([role.serviceProvider]),upload.fields([{name:'galleryImg'}, {name: 'galleryVideo'}]) , checkSchema(gallerySchema) ,  galleryCltr.update)
 app.put('/api/galleries/:id',authenticateUser, authorizeUser([role.serviceProvider]), galleryCltr.delete)
 
-app.post('/api/enquiries/:id', checkSchema(enquirySchema), authenticateUser, authorizeUser([role.customer]), enquiryCltr.create)
-app.put('/api/enquiries/:id', checkSchema(enquirySchema), authenticateUser, authorizeUser([role.serviceProvider]), enquiryCltr.update)
+app.post('/api/enquiries/:id', checkSchema(enquirySchema), authenticateUser, authorizeUser([role.customer]),body('message'), enquiryCltr.create)
+app.put('/api/enquiries/:id', checkSchema(enquirySchema), authenticateUser, authorizeUser([role.serviceProvider]), body('response'), enquiryCltr.update)
 
 app.post('/api/invioices/:id', checkSchema(invoiceSchema), authenticateUser, authorizeUser([role.serviceProvider]), invoiceCltr.create)
 app.get('/api/invoices', invoiceCltr.list)

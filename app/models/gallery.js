@@ -7,7 +7,8 @@ const gallerySchema = new Schema({
         ref : 'ServiceProvider' 
         
     },
-    media : [String]
+    galleryImg : String,
+    galleryVideo : String
 }, {timestamps: true})
 
 const Gallery = model('Gallery', gallerySchema)

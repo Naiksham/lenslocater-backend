@@ -29,7 +29,7 @@ invoiceCltr.update = async(req, res)=>{
     try{
         const id = req.params.id
         const {body} = req
-        const invoice = await Invoice.findByIdAndUpdate({_id: id, serviceProviderId : req.user.id}, body,{new : true, runValidators:true})
+        const invoice = await Invoice.findByIdAndUpdate({serviceProviderId : req.user.id}, body,{new : true, runValidators:true})
         res.status(201).json(invoice)
     } catch(err){
         console.log(err)
