@@ -8,7 +8,6 @@ enquiryCltr.create = async (req, res)=>{
         return res.status(400).json({errors : errors.array()})
     }
     try {
-        const id = req.params.id
         const { body } = req ;
         const enquiry = new Enquiry(body);
         enquiry.customerId = req.user.id

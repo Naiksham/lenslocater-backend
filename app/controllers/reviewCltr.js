@@ -9,7 +9,6 @@ reviewsCltr.create = async(req, res)=>{
         return res.status(400).json({errors : errors.array()})
     }
     try{
-        const id = req.params.id
         const {body} = req
         const reviews = await new Review(body)
         enquiry.customerId = req.user.id
@@ -38,7 +37,6 @@ ratingCltr.create = async(req, res)=>{
         return res.status(400).json({errors : errors.array()})
     }
     try{
-        const id = req.params.id
         const {body} = req
         const reviews = await new Review(body)
         enquiry.customerId = req.user.id
