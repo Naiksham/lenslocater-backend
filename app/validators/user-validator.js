@@ -21,7 +21,7 @@ const userRegisterSchema = {
                 if(!user){
                     return true
                 } else {  
-                    throw new error('Email already exists')
+                    throw new Error('Email already exists')
                 }
             }
         },

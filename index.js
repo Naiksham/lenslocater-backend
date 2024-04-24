@@ -27,6 +27,7 @@ const paymentSchema = require('./app/validators/payment-validator')
 const reviewsSchema = require('./app/validators/reviews-validator')
 const upload = require('./app/middlewares/galleryUpload')
 const userCltr = require('./app/controllers/usersCltr')
+// const adminCltr = require('./app/controllers/adminCltr')
 const serviceProviderCltr = require('./app/controllers/serviceProviderCltr')
 const galleryCltr = require('./app/controllers/galleryCltr')
 const enquiryCltr = require('./app/controllers/enquiryCltr')
@@ -44,12 +45,14 @@ app.get('/api/users/account', authenticateUser, userCltr.account)
 app.post('/api/serviceProvider', checkSchema(serviceProviderSchema),authenticateUser, authorizeUser([role.serviceProvider]), serviceProviderCltr.create)
 app.put('/api/serviceProvider/:id', checkSchema(serviceProviderSchema),authenticateUser, authorizeUser([role.serviceProvider]), serviceProviderCltr.update)
 app.delete('/api/serviceProvider/:id', checkSchema(serviceProviderSchema),authenticateUser, authorizeUser([role.serviceProvider]), serviceProviderCltr.delete)
+// app.put('/api/admin/approve/serviceProvider/:id', adminCltr.approveServiceProvider);
 
-app.post('/api/galleries/:id' , authenticateUser , authorizeUser([role.serviceProvider]),upload.fields([{name:'galleryImg'}, {name: 'galleryVideo'}]) , checkSchema(gallerySchema) ,  galleryCltr.create)
+app.post('/api/galleries' , authenticateUser , authorizeUser([role.serviceProvider]),upload.fields([{name:'galleryImg'}, {name: 'galleryVideo'}]) , checkSchema(gallerySchema) ,  galleryCltr.create)
 app.get('/api/galleries', galleryCltr.list)
 app.get('/api/galleries/:id', galleryCltr.listOne)
 app.put('/api/galleries/:id' , authenticateUser , authorizeUser([role.serviceProvider]),upload.fields([{name:'galleryImg'}, {name: 'galleryVideo'}]) , checkSchema(gallerySchema) ,  galleryCltr.update)
 app.put('/api/galleries/:id',authenticateUser, authorizeUser([role.serviceProvider]), galleryCltr.delete)
+// app.put('/api/admin/approve/gallery/:id', adminCltr.approveGallery);
 
 app.post('/api/enquiries', checkSchema(enquirySchema), authenticateUser, authorizeUser([role.customer]), enquiryCltr.create)
 app.put('/api/enquiries/:id', checkSchema(enquirySchema), authenticateUser, authorizeUser([role.serviceProvider]), enquiryCltr.update)

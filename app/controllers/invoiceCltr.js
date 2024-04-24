@@ -9,10 +9,10 @@ invoiceCltr.create = async(req, res)=>{
     }
     try{
         const {body} = req
-        const invoice = await new Invoice(body)
+        const invoice = new Invoice(body)
         enquiry.serviceProviderId = req.user.id
         enquiry.customerId = id
-        invoice.save()
+        await invoice.save()
         res.status(201).json(invoice)
     } catch(err){
         console.log(err)

@@ -26,7 +26,8 @@ const authorizeUser = (permittedRoles) => {
             res.status(403).json({error : 'You are not authorized to access this'})
         }
     }
-}
+};
+
 
 module.exports = {
     authenticateUser : authenticateUser,

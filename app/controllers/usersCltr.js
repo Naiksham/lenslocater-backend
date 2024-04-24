@@ -6,7 +6,7 @@ const jwt = require('jsonwebtoken')
 
 const userCltr = {}
 
-userCltr.register  = async(req, res)=>{
+userCltr.register = async(req, res) => {
     const errors = validationResult(req)
     if(!errors.isEmpty()){
         return res.status(400).json({errors : errors.array()})
@@ -14,36 +14,23 @@ userCltr.register  = async(req, res)=>{
     try{
         const {body} = req
         const user = new User(body)
+        const count = await User.find().countDocuments()
+        // console.log(count)
+        if(count==0){
+            user.role === role.admin
+        } else{
+            user.role === role.customer || user.role === role.serviceProvider
+        }
         const salt = await bcryptjs.genSalt()
         const encryptedPassword = await bcryptjs.hash(user.password, salt)
         user.password = encryptedPassword
         await user.save()
         res.status(201).json(user)
-    } catch (err){
+    } catch(err){
         console.log(err)
-        res.status(500).json({errors : 'Internal Server Error'})
+        res.status(500).json({errors : 'Interanl Server Error'})
     }
 }
-
-// userCltr.serviceProvider = async(req, res)=>{
-//     const errors = validationResult(req)
-//     if(!errors.isEmpty()){
-//         return res.status(400).json({errors : errors.array()})
-//     }
-//     try{
-//         const {body} = req
-//         const user = new User(body)
-//         user.role = role.serviceProvider
-//         const salt = await bcryptjs.genSalt()
-//         const encryptedPassword = await bcryptjs.hash(user.password, salt)
-//         user.password = encryptedPassword
-//         await user.save()
-//         res.status(201).json(user)
-//     } catch(err){
-//         console.log(err)
-//         res.status(500).json({errors : 'Internal Server Error'})
-//     }
-// }
 
 userCltr.login = async (req, res) => {
     const errors = validationResult(req)

@@ -8,7 +8,11 @@ const gallerySchema = new Schema({
         
     },
     galleryImg : String,
-    galleryVideo : String
+    galleryVideo : String,
+    isApproved: {
+        type: Boolean,
+        default: false
+    }
 }, {timestamps: true})
 
 const Gallery = model('Gallery', gallerySchema)

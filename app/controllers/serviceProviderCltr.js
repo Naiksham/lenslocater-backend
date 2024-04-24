@@ -1,6 +1,8 @@
 const ServiceProvider = require('../models/serviceProvider')
+const Gallery = require('../models/gallery')
 const {validationResult} = require('express-validator')
 serviceProviderCltr = {}
+adminCltr = {}
 
 serviceProviderCltr.create = async (req, res)=>{
     const errors = validationResult(req)
@@ -10,7 +12,7 @@ serviceProviderCltr.create = async (req, res)=>{
     try{
         const id = req.params.id
         const {body} = req
-        const serviceProvider = await new ServiceProvider(body)
+        const serviceProvider = new ServiceProvider(body)
         serviceProvider.userId = req.user.id
         await serviceProvider.save()
         res.status(200).json(serviceProvider)
@@ -48,3 +50,4 @@ serviceProviderCltr.delete = async (req, res)=>{
 }
 
 module.exports = serviceProviderCltr
+    

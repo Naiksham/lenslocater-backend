@@ -1,6 +1,8 @@
 const Gallery = require('../models/gallery')
 const {validationResult} = require('express-validator')
 const galleryCltr = {}
+const adminCltr = {}
+
 
 galleryCltr.create = async(req, res)=>{
     const errors = validationResult(req)

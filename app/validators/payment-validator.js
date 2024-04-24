@@ -31,9 +31,17 @@ const paymentSchema = {
         notEmpty : {
             errorMessage : 'Amount should be entered'
         },
-        isFloat:{
-            options:{min: 0.01},
-            errorMessage:'invalid amount'
+        isNumeric : {
+            errorMessage : 'amount should be a number'
+        },
+        custom: {
+            options: function() {
+                if(amount >= 0) {
+                    return true 
+                } else {
+                    throw new Error('Amount should be greater than 0')
+                }
+            }
         },
         trim : true
     }

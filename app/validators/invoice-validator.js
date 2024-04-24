@@ -53,8 +53,51 @@ const invoiceSchema =  {
                 if(!Array.isArray(value)){
                     throw new Error('lineItems should be an array')
                 }
+                if(value.length === 0){
+                    throw new Error('categories array should have properties')
+                }
+                try{
+                    value.forEach((ele)=>{
+                        if(typeof ele.categoryId != 'mongo.id'){
+                            throw new Error('categoryId should be a valid Mongo ID')
+                        }
+                        if(typeof ele.quantity != 'number'){
+                            throw new Error('quantity should be a number')
+                        }
+                        if(ele.quantity < 1){
+                            throw new Error('Quantity should be 1 or more than 1')
+                        }
+                        if(typeof ele.amount != 'number'){
+                            throw new Error('amount should be a number')
+                        }
+                        if(ele.amount <= 0){
+                            throw new Error('amount should be greater than 0')
+                        }
+                    })
+                } catch(err){
+                    throw new Error(err)
+                }
+                
             }
         }
+    },
+    amount : {
+        notEmpty : {
+            errorMessage : 'Amount should be entered'
+        },
+        isNumeric : {
+            errorMessage : 'amount should be a number'
+        },
+        custom: {
+            options: function() {
+                if(amount >= 0) {
+                    return true 
+                } else {
+                    throw new Error('Amount should be greater than 0')
+                }
+            }
+        },
+        trim : true
     }
 }
 

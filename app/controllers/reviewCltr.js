@@ -10,10 +10,10 @@ reviewsCltr.create = async(req, res)=>{
     }
     try{
         const {body} = req
-        const reviews = await new Review(body)
+        const reviews = new Review(body)
         enquiry.customerId = req.user.id
         enquiry.serviceProviderId = id
-        reviews.save()
+        await reviews.save()
         res.status(201).json(reviews)
     } catch(err){
         console.log(err)
