@@ -42,7 +42,7 @@ app.post('/api/users/register', checkSchema(userRegisterSchema), userCltr.regist
 app.post('/api/users/login', checkSchema(userLoginSchema), userCltr.login)
 app.get('/api/users/account', authenticateUser, userCltr.account)
 
-app.post('/api/serviceProvider', checkSchema(serviceProviderSchema),authenticateUser, authorizeUser([role.serviceProvider]), serviceProviderCltr.create)
+app.post('/api/serviceProvider', authenticateUser, authorizeUser([role.serviceProvider]),checkSchema(serviceProviderSchema), serviceProviderCltr.create)
 app.put('/api/serviceProvider/:id', checkSchema(serviceProviderSchema),authenticateUser, authorizeUser([role.serviceProvider]), serviceProviderCltr.update)
 app.delete('/api/serviceProvider/:id', checkSchema(serviceProviderSchema),authenticateUser, authorizeUser([role.serviceProvider]), serviceProviderCltr.delete)
 // app.put('/api/admin/approve/serviceProvider/:id', adminCltr.approveServiceProvider);

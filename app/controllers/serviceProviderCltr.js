@@ -10,7 +10,7 @@ serviceProviderCltr.create = async (req, res)=>{
         return res.status(400).json({errors : errors.array()})
     }
     try{
-        const id = req.params.id
+        // const id = req.params.id
         const {body} = req
         const serviceProvider = new ServiceProvider(body)
         serviceProvider.userId = req.user.id

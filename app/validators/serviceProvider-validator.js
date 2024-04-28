@@ -1,4 +1,3 @@
-const { Error } = require('mongoose')
 const ServiceProvider = require('../models/serviceProvider')
 const serviceType = require('../utils/service-type')
 
@@ -10,9 +9,9 @@ const serviceProviderSchema = {
         isNumeric : {
             errorMessage : 'Mobile should be in Number'
         },
-        isLength : {
-            options : {min : 10, max : 10}
-        },
+        // isLength : {
+        //     options : {min : 10, max : 10}
+        // },
         trim : true
     },
     serviceType : {

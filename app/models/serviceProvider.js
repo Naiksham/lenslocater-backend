@@ -13,14 +13,7 @@ const serviceProviderSchema = new Schema({
         name : String,
         amount : Number
     }], // ['weddding', 'baby shoot', 'birthday]
-    isVerified : {
-        type : Boolean,
-        default : false
-    },
-    isApproved: {
-        type: Boolean,
-        default: false
-    },
+    isVerified : Boolean,
     socialLinks : String,
     location : String,
     // geo : {

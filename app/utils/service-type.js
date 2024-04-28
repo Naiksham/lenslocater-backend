@@ -1,5 +1,6 @@
 module.exports = {
     photography : 'photography',
-    videography : 'videography'
+    videography : 'videography',
+    both : 'both'
 }
 
