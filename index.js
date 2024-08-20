@@ -1,4 +1,3 @@
-// server.js
 require('dotenv').config()
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -34,7 +33,9 @@ const enquiryCltr = require('./app/controllers/enquiryCltr')
 const invoiceCltr = require('./app/controllers/invoiceCltr')
 const paymentsCltr = require('./app/controllers/paymentCltr')
 const {reviewsCltr, ratingCltr} = require('./app/controllers/reviewCltr')
+const {list , listOne} = require ('./app/controllers/serviceProviderCltr')
 const role = require('./app/utils/role');
+
 ConfigureDB()
 
 app.post('/api/users/register', checkSchema(userRegisterSchema), userCltr.register)
@@ -42,10 +43,16 @@ app.post('/api/users/register', checkSchema(userRegisterSchema), userCltr.regist
 app.post('/api/users/login', checkSchema(userLoginSchema), userCltr.login)
 app.get('/api/users/account', authenticateUser, userCltr.account)
 
+
+// app.get('/serviceProvider', list);
+// app.get('/serviceProvider/:id', listOne);
 app.post('/api/serviceProvider', authenticateUser, authorizeUser([role.serviceProvider]),checkSchema(serviceProviderSchema), serviceProviderCltr.create)
 app.put('/api/serviceProvider/:id', checkSchema(serviceProviderSchema),authenticateUser, authorizeUser([role.serviceProvider]), serviceProviderCltr.update)
 app.delete('/api/serviceProvider/:id', checkSchema(serviceProviderSchema),authenticateUser, authorizeUser([role.serviceProvider]), serviceProviderCltr.delete)
 // app.put('/api/admin/approve/serviceProvider/:id', adminCltr.approveServiceProvider);
+// app.get ('/api/serviceProvider/:id',authenticateUser,authorizeUser([role.serviceProvider],serviceProviderCltr.listOne))
+app.get('/api/serviceProvider/:id',authenticateUser,authorizeUser([role.serviceProvider]),serviceProviderCltr.listOne)
+
 
 app.post('/api/galleries' , authenticateUser , authorizeUser([role.serviceProvider]),upload.fields([{name:'galleryImg'}, {name: 'galleryVideo'}]) , checkSchema(gallerySchema) ,  galleryCltr.create)
 app.get('/api/galleries', galleryCltr.list)

@@ -88,4 +88,3 @@ galleryCltr.delete = async(req, res)=>{
 }
 
 module.exports = galleryCltr
-

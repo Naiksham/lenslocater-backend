@@ -3,10 +3,18 @@ const role = require('../utils/role')
 const {validationResult} = require('express-validator')
 const bcryptjs = require('bcryptjs')
 const jwt = require('jsonwebtoken')
+const usersCltr = {}
+usersCltr.listServiceProviders = async (req, res) => {
+    try {
+        const serviceProviders = await ServiceProvider.find();
+        res.json(serviceProviders);
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({ errors: 'Internal Server Error' });
+    }
+};
 
-const userCltr = {}
-
-userCltr.register = async(req, res) => {
+usersCltr.register = async(req, res) => {
     const errors = validationResult(req)
     if(!errors.isEmpty()){
         return res.status(400).json({errors : errors.array()})
@@ -32,7 +40,7 @@ userCltr.register = async(req, res) => {
     }
 }
 
-userCltr.login = async (req, res) => {
+usersCltr.login = async (req, res) => {
     const errors = validationResult(req)
     if(!errors.isEmpty()){
         return res.status(400).json({errors : errors.array()})
@@ -60,7 +68,7 @@ userCltr.login = async (req, res) => {
     }
 }
 
-userCltr.account = async (req, res) => {
+usersCltr.account = async (req, res) => {
     try{
         const user = await User.findById(req.user.id).select({password : 0})
         res.json(user)
@@ -70,4 +78,4 @@ userCltr.account = async (req, res) => {
     }
 }
 
-module.exports = userCltr
+module.exports = usersCltr
